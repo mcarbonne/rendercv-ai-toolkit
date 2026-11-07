@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Pre-commit hook for the template repository maintainer:
+# Prevents committing personal files in input/, variants/, jobs/, or rendercv_output/.
+
+set -euo pipefail
+
+forbidden=$(git diff --cached --name-only \
+    | grep -E '^(input|variants|jobs|rendercv_output)/' \
+    | grep -vE '^(input/_template_master_resume\.md|variants/\.gitkeep|jobs/(_template|README)\.md)$' || true)
+
+if [[ -n "$forbidden" ]]; then
+    echo "ERROR [pre-commit]: Personal files staged in protected folders:" >&2
+    echo "$forbidden" | sed 's/^/  - /' >&2
+    exit 1
+fi

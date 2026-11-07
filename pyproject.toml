@@ -1,0 +1,36 @@
+[project]
+name = "rendercv-ai-toolkit"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "markdownify>=1.2.3",
+    "pypdf>=6.21.4",
+    "python-jobspy>=1.4.1",
+    "pyyaml>=6.0.3",
+    "rendercv[full]>=2.8",
+    "stopwordsiso>=0.7.1",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # Pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "BLE", # flake8-blind-except
+    "SIM", # flake8-simplify
+    "C4",  # flake8-comprehensions
+    "PIE", # flake8-pie
+    "PTH", # flake8-use-pathlib
+    "RUF", # Ruff-specific rules
+]
+ignore = [
+    "RUF001", # allow en-dash / em-dash in CLI output strings
+]
