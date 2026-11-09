@@ -86,6 +86,10 @@ make score                                         # Rank all archived offers in
 # Workspace utilities
 make extract                                       # Extract raw text & URLs from files in input/
 make reset                                         # Wipe personal data (input/, variants/, jobs/, output)
+
+# Development
+make lint                                          # ruff (lint + format check) & shellcheck, also run in GitHub CI
+make fmt                                           # Auto-fix & format Python code with ruff
 ```
 
 ---

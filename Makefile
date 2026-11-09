@@ -8,7 +8,7 @@ COUNTRY ?= France
 JOB ?=
 
 .DEFAULT_GOAL := help
-.PHONY: help render render-all all watch ats ats-all job search score extract reset hooks-maintainer
+.PHONY: help render render-all all watch ats ats-all job search score extract reset hooks-maintainer lint fmt
 
 help:
 	@echo "RenderCV AI Toolkit — Available commands:"
@@ -22,6 +22,8 @@ help:
 	@echo "  make search Q=\"...\" [LOC=\"...\"] [COUNTRY=...] Search job boards & score against variants"
 	@echo "  make score [JOB=jobs/<job>.md]                Score archived jobs against all variants"
 	@echo "  make reset                                    Remove personal files to start fresh"
+	@echo "  make lint                                     Run ruff (lint + format check) and shellcheck"
+	@echo "  make fmt                                      Auto-format and fix Python code with ruff"
 	@echo "  make hooks-maintainer                         Template maintainers only: block committing personal data"
 
 render:
@@ -70,6 +72,15 @@ extract:
 
 reset:
 	uv run python scripts/reset_workspace.py
+
+lint:
+	uv run --only-group dev ruff check scripts/
+	uv run --only-group dev ruff format --check scripts/
+	shellcheck .githooks/pre-commit
+
+fmt:
+	uv run --only-group dev ruff check --fix scripts/
+	uv run --only-group dev ruff format scripts/
 
 hooks-maintainer:
 	git config core.hooksPath .githooks
