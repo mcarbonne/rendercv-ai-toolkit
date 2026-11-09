@@ -30,6 +30,8 @@ make ats-all                                  # Render + ATS check all variants
 make job URL="https://..."                    # Import job posting into jobs/
 make search Q="..." [LOC="..."] [COUNTRY=...] # Multi-board job search & CV scoring
 make score                                    # Score all jobs/*.md against all variants/*.yaml
+make lint                                     # ruff check + format check, shellcheck (also run in GitHub CI)
+make fmt                                      # Auto-fix/format Python with ruff
 ```
 
 ## Critical Rules & Gotchas

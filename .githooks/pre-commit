@@ -10,6 +10,8 @@ forbidden=$(git diff --cached --name-only \
 
 if [[ -n "$forbidden" ]]; then
     echo "ERROR [pre-commit]: Personal files staged in protected folders:" >&2
-    echo "$forbidden" | sed 's/^/  - /' >&2
+    while IFS= read -r file; do
+        echo "  - $file" >&2
+    done <<< "$forbidden"
     exit 1
 fi

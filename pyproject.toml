@@ -34,3 +34,8 @@ select = [
 ignore = [
     "RUF001", # allow en-dash / em-dash in CLI output strings
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.17.4",
+]
